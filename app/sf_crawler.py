@@ -80,8 +80,13 @@ class Crawler(SqlControl):
             return False
 
     def reshape(self, content):
-        numofspot = 45 # numbers of spot
-        cellofspot = numofspot*7 # each spot with 7 columns
+        numofspot = 45  # numbers of spot
+        cellofspot = numofspot*7  # each spot with 7 columns
+        # 临时改变下载的数据，因绵纱数据缺失
+        #——————————————————————
+        for i in range(3):
+            content.insert(207, 0.01)
+        #——————————————————————
         content = content[0:cellofspot]  # 44 spot each with 7 column, others delete
         content = np.array(content)
         content = np.reshape(content, [numofspot, 7])

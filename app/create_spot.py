@@ -81,7 +81,10 @@ class Spot(SqlControl):
                 # select 现货价格 from table sf in upper loop where 商品 = sp in lower loop
                 sqlGet = "SELECT 现货价格 FROM {0} WHERE 商品  = '{1}'".format(sf, sp)
                 spotPrice = self.sf_cursor.execute(sqlGet).fetchall()
-                spotPrice = spotPrice[0][0]
+                try:
+                    spotPrice = spotPrice[0][0]
+                except:
+                    spotPrice = 0
                 # insert price to spot table
                 # inser into table spot (商品名称) values (商品价格) by update
                 sqlInsert = "UPDATE {0} SET '{1}' = {2} WHERE 日期 = '{3}';".format(self.spot_tb_name, sp, spotPrice, dateTime)
