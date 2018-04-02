@@ -49,7 +49,7 @@ class ThirtyThree(SqlControl):
         df_content.index = df_content.iloc[:, 1].tolist()   #reindex sf data with spot name
         df_content = df_content.drop([0, 1, 2, 5, 6, 7, 8], axis=1)         #drop the columns not useful
         res = pd.concat([res, df_content], join='outer', axis=1)
-        res.columns = ['现货变化', '代码', '期货价格', '180极限', '基差*极限']
+        res.columns = ['现货变化', '代码', '期货价格', '180极限', '顶/底指标（基差*极限）']
         res = res[res.iloc[:, 0] != 0]                   #filtrate the result only fullfil the terms
         return res
 

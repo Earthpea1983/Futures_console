@@ -80,9 +80,11 @@ class Crawler(SqlControl):
             return False
 
     def reshape(self, content):
-        content = content[0:308]  # 44 spot each with 7 column, others delete
+        numofspot = 45 # numbers of spot
+        cellofspot = numofspot*7 # each spot with 7 columns
+        content = content[0:cellofspot]  # 44 spot each with 7 column, others delete
         content = np.array(content)
-        content = np.reshape(content, [44, 7])
+        content = np.reshape(content, [numofspot, 7])
         dfContent = pd.DataFrame(content, columns=['商品','现货价格','代码','期货价格','最高基差180', \
                                                   '最低基差180','平均基差180'])
         dfContent['现货价格'] = dfContent['现货价格'].astype(float)
